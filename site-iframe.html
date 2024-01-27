@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate (https://github.com/davidjbradshaw/iframe-resizer)</title>
+    <style>
+      #engine_iframe {
+        border: 1px solid #eeeeee;
+        width: 100%;
+        overflow: hidden;
+        height: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <iframe id="engine_iframe"
+        src="http://localhost:10004" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+      ></iframe>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <script src="./iframeResizer.min.js"></script> 
+    <script>
+      $(document).ready(function() {
+        const urlParams = new URLSearchParams(document.location.search.substring(1));
+        const promo = urlParams.get('promotion_code')
+        if(promo){
+          var iframe = document.getElementById('engine_iframe');
+          iframe.src = iframe.src + '?promotion_code='+promo;
+        }
+      });
+      $("#engine_iframe").on('load', function() {
+          iFrameResize();
+      });    
+    </script>    
+  </body>
+</html>
